@@ -62,15 +62,15 @@ namespace wcf_matchmaking
 
         public void Disconnect(int ID)
         {
-            var lobby = lobbys.FirstOrDefault(l => l.ID == ID);
+            var lobby = lobbys.FirstOrDefault(lobby_ => lobby_.ID == ID);
             if (lobby != null)
                 lobbys.Remove(lobby);
         }
 
         public void SendMove(int move, int lobbyID, int senderID)
         {
-            var Lobby = lobbys.FirstOrDefault(l => l.ID == lobbyID);
-            var opponent = Lobby.players.FirstOrDefault(p => p.ID != senderID);
+            var Lobby = lobbys.FirstOrDefault(lobby_ => lobby_.ID == lobbyID);
+            var opponent = Lobby.players.FirstOrDefault(player_ => player_.ID != senderID);
             if (opponent != null)
                 opponent.operationContext.GetCallbackChannel<IserviceCallback>().MoveCallback(move);
         }
